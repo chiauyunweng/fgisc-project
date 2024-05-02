@@ -51,10 +51,10 @@ public class DeerMove : MonoBehaviour
             //bodies.Add(Instantiate(bodyPrefab));
             bodies.Add(Instantiate(bodyPrefab, transform.position, Quaternion.identity));
         }
-        //if (collision.CompareTag("obstacle"))
-        //{
-        //    ResetStage();
-        //}
+        if (collision.CompareTag("obstacle"))
+        {
+           ResetStage();
+        }
     }
     private void ResetStage()
     {
