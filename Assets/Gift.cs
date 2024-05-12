@@ -4,22 +4,30 @@ using UnityEngine;
 
 public class Gift : MonoBehaviour
 {
-    public Collider2D foodArea;
+    public BoxCollider2D gridArea;
     // Start is called before the first frame update
     void Start()
     {
-        
+        RandomizePosition();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    }
+    private void RandomizePosition()
     {
-        transform.position = new Vector3(Random.Range(foodArea.bounds.min.x, foodArea.bounds.max.x),
-            Random.Range(foodArea.bounds.min.y, foodArea.bounds.max.y), 0);
+        Bounds bounds = this.gridArea.bounds;
+        float x = Random.Range(bounds.min.x, bounds.max.x);
+        float y = Random.Range(bounds.min.y, bounds.max.y);
+        this.transform.position = new Vector3(Mathf.Round(x), Mathf.Round(y), 0.0f);
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            RandomizePosition();
+        }
     }
 }

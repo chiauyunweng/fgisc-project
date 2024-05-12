@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class DeerMove : MonoBehaviour
 {
-    Vector3 direction;
-    public Transform bodyPrefab;
-    public List<Transform> bodies = new List<Transform>();
+    private Vector2 direction = Vector2.right;
+    private List<Transform> bodyParts;
+    public Transform segmentPrefab;
     // Start is called before the first frame update
     void Start()
     {
-        Time.timeScale = 0.7f;
-        bodies.Add(transform);
+        bodyParts = new List<Transform>();
+        bodyParts.Add(this.transform);
     }
 
     // Update is called once per frame
@@ -20,51 +20,62 @@ public class DeerMove : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            direction = Vector3.up;
+            direction = Vector2.up;
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            direction = Vector3.down;
+            direction = Vector2.down;
         }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            direction = Vector3.left;
+            direction = Vector2.left;
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            direction = Vector3.right;
+            direction = Vector2.right;
         }
     }
-
     private void FixedUpdate()
     {
-        for (int i = bodies.Count - 1; i > 0; i--)
+        for (int i = bodyParts.Count - 1; i > 0; i--)
         {
-            bodies[i].position = bodies[i - 1].position;
+            bodyParts[i].position = bodyParts[i - 1].position;
         }
-        transform.Translate(direction);
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Gift"))
-        {
-            //bodies.Add(Instantiate(bodyPrefab));
-            bodies.Add(Instantiate(bodyPrefab, transform.position, Quaternion.identity));
-        }
-        if (collision.CompareTag("obstacle"))
-        {
-           ResetStage();
-        }
-    }
-    private void ResetStage()
-    {
-        transform.position = Vector3.zero;
-        direction = Vector3.zero;
+        this.transform.position = new Vector3(
+            Mathf.Round(this.transform.position.x) + direction.x,
+            Mathf.Round(this.transform.position.y) + direction.y,
+            0.0f
+        );
 
-        for(int i = 1; i < bodies.Count; i++)
+
+    }
+
+    private void ResetState()
+    {
+        for(int i = 1; i < bodyParts.Count; i++)
         {
-            Destroy(bodies[i].gameObject);
+            Destroy(bodyParts[i].gameObject);
         }
-        bodies.Add(transform);
+        bodyParts.Clear();
+        bodyParts.Add(this.transform);
+
+        this.transform.position = new Vector3(0,0,0);
+    }
+    private void Grow()
+    {
+        Transform segment = Instantiate(this.segmentPrefab);
+        segment.position = bodyParts[bodyParts.Count - 1].position;
+
+        bodyParts.Add(segment);
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Gift")
+        {
+            Grow();
+        }else if(other.tag == "obstacle")
+        {
+            ResetState();
+        }
     }
 }
