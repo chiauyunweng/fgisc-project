@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class DeerMove : MonoBehaviour
 {
+    [SerializeField] private Text cherriesText;
     private Vector2 direction = Vector2.zero;
     private List<Transform> bodyParts;
     public Transform[] segmentPrefab;
@@ -42,6 +44,7 @@ public class DeerMove : MonoBehaviour
     }
     private void FixedUpdate()
     {
+
         for (int i = bodyParts.Count - 1; i > 0; i--)
         {
             bodyParts[i].position = bodyParts[i - 1].position;
@@ -70,36 +73,36 @@ public class DeerMove : MonoBehaviour
     {
         Transform segment = Instantiate(this.segmentPrefab[0]);
         segment.position = bodyParts[bodyParts.Count - 1].position;
-
         bodyParts.Add(segment);
     }
     private void GrowHead()
     {
         Transform segment = Instantiate(this.segmentPrefab[1]);
-        segment.position = bodyParts[bodyParts.Count -1].position;
-
-        bodyParts.Add(segment);
+        segment.position = bodyParts[bodyParts.Count - 1].position;
+        bodyParts.Add(segment);        
+  
+        
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Gift")
         {
-            GrowHead();
-            //if (Gift.rand == 4)
-            //{
-            //    GrowHead();
-            //}
-            //else
-            //{
-            //    GrowGift();
-            //}
 
-
+            if (Gift.rand == 3)
+            {
+                GrowHead();
+            }
+            else
+            {
+                GrowGift();
+            }
         }
         else if(other.tag == "obstacle")
         {
+            Debug.Log("Obstacle");
             SceneManager.LoadScene(3);
         }
     }
+
     
 }
