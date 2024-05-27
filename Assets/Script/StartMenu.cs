@@ -10,5 +10,9 @@ public class StartMenu : MonoBehaviour
         //用LoadScene(buildIndex)來更換目前顯示的Scene
         SceneManager.LoadScene(2);
     }
-
+    public void Changetogame() //記得加public不然等等在加按鈕事件的時候讀不到
+    {
+        //用LoadScene(buildIndex)來更換目前顯示的Scene
+        SceneManager.LoadScene(4);
+    }
 }
