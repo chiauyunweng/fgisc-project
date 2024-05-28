@@ -4,17 +4,21 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static allcontrol;
 
 
 public class DeerMove : MonoBehaviour
 {
-    [SerializeField] private Text cherriesText;
+    
     private Vector2 direction = Vector2.zero;
     private List<Transform> bodyParts;
     public Transform[] segmentPrefab;
     public static int rand_num;
     // Start is called before the first frame update
     [SerializeField] Canvas GameOverCanvas;
+    [SerializeField] private Text giftText;
+    int point=GameManger.Instance.score;
+
     void Start()
     {
         bodyParts = new List<Transform>();
@@ -91,6 +95,9 @@ public class DeerMove : MonoBehaviour
             if (Gift.rand == 3)
             {
                 GrowHead();
+                point++;
+                giftText.text = "gift" + point;
+                GameManger.Instance.score = point;
             }
             else
             {
