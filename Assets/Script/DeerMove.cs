@@ -62,7 +62,7 @@ public class DeerMove : MonoBehaviour
 
     }
 
-    /* private void ResetState()
+    private void ResetState()
     {
         for (int i = 1; i < bodyParts.Count; i++)
         {
@@ -72,7 +72,11 @@ public class DeerMove : MonoBehaviour
         bodyParts.Add(this.transform);
         direction = Vector2.zero;
         this.transform.position = new Vector3(0, 0, 0);
-    } */
+        GameManger.Instance.score = 0;
+        giftText.text = "生命值：0";
+        Gift.isGrass = false;
+
+    } 
     private void GrowGift()
     {
         Transform segment = Instantiate(this.segmentPrefab[0]);
@@ -94,20 +98,23 @@ public class DeerMove : MonoBehaviour
 
             if (Gift.rand == 3)
             {
+                //Debug.Log(Gift.rand);
                 GrowHead();
                 point++;
-                giftText.text = "gift" + point;
+                giftText.text = "生命值：" + point;
                 GameManger.Instance.score = point;
             }
             else
             {
                 GrowGift();
+                //Debug.Log(Gift.rand);
             }
         }
         else if(other.tag == "obstacle")
         {
-            Debug.Log("Obstacle");
+     
             SceneManager.LoadScene(3);
+            ResetState();
         }
     }
 

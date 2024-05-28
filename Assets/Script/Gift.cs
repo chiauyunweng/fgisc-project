@@ -7,6 +7,7 @@ public class Gift : MonoBehaviour
     public BoxCollider2D gridArea;
     public static int rand;
     public Sprite[] gift_img;
+    public static bool isGrass = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,14 +26,21 @@ public class Gift : MonoBehaviour
         float x = Random.Range(bounds.min.x, bounds.max.x);
         float y = Random.Range(bounds.min.y, bounds.max.y);
         this.transform.position = new Vector3(Mathf.Round(x), Mathf.Round(y), 0.0f);
-        rand = Random.Range(0, gift_img.Length);
+        rand = Random.Range(0, 4);
         GetComponent<SpriteRenderer>().sprite = gift_img[rand];
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
+            Debug.Log(rand);
+            if(rand == 3)
+            {
+                isGrass = true;
+                Debug.Log("isGrass");
+            }
             RandomizePosition();
+
         }
         if(other.tag == "obstacle")
         {
