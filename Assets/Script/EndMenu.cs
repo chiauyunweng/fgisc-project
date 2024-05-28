@@ -11,6 +11,7 @@ public class EndMenu : MonoBehaviour
         {
             //用LoadScene(buildIndex)來更換目前顯示的Scene
             SceneManager.LoadScene(3);
+            
         }
     
 
