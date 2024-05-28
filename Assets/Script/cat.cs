@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using static allcontrol;
 
 public class cat : MonoBehaviour
 {
@@ -10,6 +12,8 @@ public class cat : MonoBehaviour
     public float jump;
     bool isJumping;
     public Gamemanger gm;
+    [SerializeField] private Text giftText;
+    int point = GameManger.Instance.score;
 
     void Start()
     {
@@ -31,7 +35,14 @@ public class cat : MonoBehaviour
         isJumping=false;
         if(collision.gameObject.tag == "tree")
         {
-            gm.Gameover();
+            point--;
+            giftText.text = "¥Í©R­È¡G" + point;
+            GameManger.Instance.score = point;
+            if(point == 0)
+            {
+                gm.Gameover();
+            }
+                
 
         }
     }
