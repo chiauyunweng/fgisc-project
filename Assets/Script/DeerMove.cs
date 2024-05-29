@@ -73,7 +73,7 @@ public class DeerMove : MonoBehaviour
         direction = Vector2.zero;
         this.transform.position = new Vector3(0, 0, 0);
         Gift.isGrass = false;
-        giftText.text = "生命值：0";
+        giftText.text = "score：0";
 
 
     }
@@ -101,7 +101,7 @@ public class DeerMove : MonoBehaviour
                 
                 GrowHead();
                 point++;
-                giftText.text = "生命值：" + point;
+                giftText.text = "score：" + point;
                 GameManger.Instance.score = point;
             }
             else
@@ -111,8 +111,7 @@ public class DeerMove : MonoBehaviour
         }
         else if(other.tag == "obstacle")
         {
-     
-            SceneManager.LoadScene(3);
+            SceneManager.LoadScene("gameOver");
             ResetState();
         }
     }

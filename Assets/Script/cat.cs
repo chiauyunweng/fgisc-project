@@ -7,7 +7,6 @@ using static allcontrol;
 public class cat : MonoBehaviour
 {
     // Start is called before the first frame update
-
     Rigidbody2D rb;
     public float jump;
     bool isJumping;
@@ -17,6 +16,7 @@ public class cat : MonoBehaviour
 
     void Start()
     {
+        giftText.text = ": " + point;
         rb = GetComponent<Rigidbody2D>();
         isJumping = false;
     }
@@ -31,20 +31,18 @@ public class cat : MonoBehaviour
         }
         
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         isJumping=false;
-        if(collision.gameObject.tag == "tree")
+        if(collision.tag == "tree")
         {
             point--;
-            giftText.text = "ÉúÃüÖµ" + point;
+            giftText.text = ": " + point;
             GameManger.Instance.score = point;
             if (point == 0)
             {
                 gm.Gameover();
             }
-
-
         }
     }
 }
