@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static allcontrol;
 
 public class EndMenu : MonoBehaviour
 {
@@ -11,8 +12,8 @@ public class EndMenu : MonoBehaviour
         {
             //用LoadScene(buildIndex)來更換目前顯示的Scene
             SceneManager.LoadScene(3);
-            
-        }
+            GameManger.Instance.score = 0;
+    }
     
 
     // Update is called once per frame

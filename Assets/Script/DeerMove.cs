@@ -72,11 +72,11 @@ public class DeerMove : MonoBehaviour
         bodyParts.Add(this.transform);
         direction = Vector2.zero;
         this.transform.position = new Vector3(0, 0, 0);
-        GameManger.Instance.score = 0;
-        giftText.text = "生命值：0";
         Gift.isGrass = false;
+        giftText.text = "生命值：0";
 
-    } 
+
+    }
     private void GrowGift()
     {
         Transform segment = Instantiate(this.segmentPrefab[0]);
@@ -98,7 +98,7 @@ public class DeerMove : MonoBehaviour
 
             if (Gift.rand == 3)
             {
-                //Debug.Log(Gift.rand);
+                
                 GrowHead();
                 point++;
                 giftText.text = "生命值：" + point;
@@ -107,7 +107,6 @@ public class DeerMove : MonoBehaviour
             else
             {
                 GrowGift();
-                //Debug.Log(Gift.rand);
             }
         }
         else if(other.tag == "obstacle")

@@ -33,12 +33,8 @@ public class Gift : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log(rand);
-            if(rand == 3)
-            {
-                isGrass = true;
-                Debug.Log("isGrass");
-            }
+            //Debug.Log(rand);
+            
             RandomizePosition();
 
         }

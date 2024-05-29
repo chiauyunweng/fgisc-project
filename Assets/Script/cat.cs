@@ -29,6 +29,7 @@ public class cat : MonoBehaviour
             rb.velocity = new Vector2(0, jump);
             isJumping=true;
         }
+        
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -36,13 +37,13 @@ public class cat : MonoBehaviour
         if(collision.gameObject.tag == "tree")
         {
             point--;
-            giftText.text = "¥Í©R­È¡G" + point;
+            giftText.text = "ÉúÃüÖµ" + point;
             GameManger.Instance.score = point;
-            if(point == 0)
+            if (point == 0)
             {
                 gm.Gameover();
             }
-                
+
 
         }
     }
