@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class Gift : MonoBehaviour
 {
     public BoxCollider2D gridArea;
     public static int rand;
     public Sprite[] gift_img;
-    public static bool isGrass = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,13 +34,15 @@ public class Gift : MonoBehaviour
         if (other.tag == "Player")
         {
             //Debug.Log(rand);
-            
+            Task.Delay(100);
             RandomizePosition();
+            Debug.Log("randomizePosition: rand => " + rand);
 
         }
         if(other.tag == "obstacle")
         {
             RandomizePosition();
+            Debug.Log("randomizePosition: rand => " + rand);
         }
     }
 }

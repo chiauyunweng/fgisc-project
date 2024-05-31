@@ -13,9 +13,8 @@ public class DeerMove : MonoBehaviour
     private Vector2 direction = Vector2.zero;
     private List<Transform> bodyParts;
     public Transform[] segmentPrefab;
-    public static int rand_num;
     // Start is called before the first frame update
-    [SerializeField] Canvas GameOverCanvas;
+    //[SerializeField] Canvas GameOverCanvas;
     [SerializeField] private Text giftText;
     int point=GameManger.Instance.score;
 
@@ -28,7 +27,6 @@ public class DeerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rand_num = Gift.rand;
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             direction = Vector2.up;
@@ -72,7 +70,6 @@ public class DeerMove : MonoBehaviour
         bodyParts.Add(this.transform);
         direction = Vector2.zero;
         this.transform.position = new Vector3(0, 0, 0);
-        Gift.isGrass = false;
         giftText.text = "score：0";
 
 
@@ -98,7 +95,8 @@ public class DeerMove : MonoBehaviour
 
             if (Gift.rand == 3)
             {
-                
+
+                Debug.Log(Gift.rand);
                 GrowHead();
                 point++;
                 giftText.text = "score：" + point;
@@ -111,8 +109,9 @@ public class DeerMove : MonoBehaviour
         }
         else if(other.tag == "obstacle")
         {
-            SceneManager.LoadScene("gameOver");
             ResetState();
+            SceneManager.LoadScene("gameOver");
+            
         }
     }
 

@@ -123,6 +123,9 @@ MonoBehaviour:
   movementSpeed: 10
   startPositon: 20
   endPositon: -20
+  tree_img:
+  - {fileID: 8349278876224233021}
+  - {fileID: 1688076765968453005, guid: 0e8c679c92794a849a9ac43a55dbcf9f, type: 3}
 --- !u!61 &2972048190980727649
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -155,7 +158,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.07240701, y: -0.15688199}
+  m_Offset: {x: -0.07240701, y: -0.5197395}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -166,5 +169,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.7503715, y: 3.086236}
+  m_Size: {x: 1.7503715, y: 2.360521}
   m_EdgeRadius: 0
