@@ -36,13 +36,11 @@ public class Gift : MonoBehaviour
             //Debug.Log(rand);
             Task.Delay(100);
             RandomizePosition();
-            Debug.Log("randomizePosition: rand => " + rand);
 
         }
         if(other.tag == "obstacle")
         {
             RandomizePosition();
-            Debug.Log("randomizePosition: rand => " + rand);
         }
     }
 }

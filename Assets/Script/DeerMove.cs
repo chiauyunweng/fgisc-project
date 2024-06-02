@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Threading.Tasks;
 using static allcontrol;
 
 
@@ -11,15 +12,19 @@ public class DeerMove : MonoBehaviour
 {
     
     private Vector2 direction = Vector2.zero;
+    private Vector2 last_direction = Vector2.zero;
     private List<Transform> bodyParts;
     public Transform[] segmentPrefab;
     // Start is called before the first frame update
     //[SerializeField] Canvas GameOverCanvas;
     [SerializeField] private Text giftText;
+    [SerializeField] public AudioSource touchGift;
+    [SerializeField] public AudioSource touchObstacle;
     int point=GameManger.Instance.score;
 
     void Start()
     {
+        Time.timeScale = 1;
         bodyParts = new List<Transform>();
         bodyParts.Add(this.transform);
     }
@@ -27,33 +32,99 @@ public class DeerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        last_direction = direction;
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            direction = Vector2.up;
+            if(last_direction == Vector2.down)
+            {
+                if(bodyParts.Count == 1)
+                {
+                    direction = Vector2.up;
+                }
+                else
+                {
+                    ResetState();
+                    SceneManager.LoadScene("gameOver");
+                }
+            }
+            else
+            {
+                direction = Vector2.up;
+            }
+            
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            direction = Vector2.down;
+            if (last_direction == Vector2.up)
+            {
+                if(bodyParts.Count == 1)
+                {
+                    direction = Vector2.down;
+                }
+                else
+                {
+                    ResetState();
+                    SceneManager.LoadScene("gameOver");
+                }
+                
+            }
+            else
+            {
+                direction = Vector2.down;
+            }
+            
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            direction = Vector2.left;
+            if (last_direction == Vector2.right)
+            {
+                if(bodyParts.Count == 1)
+                {
+                    direction = Vector2.left;
+                }
+                else
+                {
+                    ResetState();
+                    SceneManager.LoadScene("gameOver");
+                }
+            }
+            else
+            {
+                direction = Vector2.left;
+            }
+            
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            direction = Vector2.right;
+            if (last_direction == Vector2.left)
+            {
+                if(bodyParts.Count == 1)
+                {
+                    direction = Vector2.right;
+                }
+                else
+                {
+                    ResetState();
+                    SceneManager.LoadScene("gameOver");
+                }
+            }
+            else
+            {
+                direction = Vector2.right;
+            }
+            
         }
     }
-    private void FixedUpdate()
-    {
 
+    void FixedUpdate()
+    {
         for (int i = bodyParts.Count - 1; i > 0; i--)
         {
             bodyParts[i].position = bodyParts[i - 1].position;
         }
-        this.transform.position = new Vector3(
-            Mathf.Round(this.transform.position.x) + direction.x,
-            Mathf.Round(this.transform.position.y) + direction.y,
+        transform.position = new Vector3(
+            Mathf.Round(transform.position.x) + direction.x,
+            Mathf.Round(transform.position.y) + direction.y,
             0.0f
         );
 
@@ -92,11 +163,10 @@ public class DeerMove : MonoBehaviour
     {
         if (other.tag == "Gift")
         {
+            touchGift.Play();
 
             if (Gift.rand == 3)
             {
-
-                Debug.Log(Gift.rand);
                 GrowHead();
                 point++;
                 giftText.text = "score：" + point;
@@ -109,11 +179,10 @@ public class DeerMove : MonoBehaviour
         }
         else if(other.tag == "obstacle")
         {
+            touchObstacle.Play();
             ResetState();
             SceneManager.LoadScene("gameOver");
             
         }
     }
-
-    
 }

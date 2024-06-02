@@ -12,6 +12,7 @@ public class cat : MonoBehaviour
     bool isJumping;
     public Gamemanger gm;
     [SerializeField] private Text giftText;
+    [SerializeField] public AudioSource touchTree;
     int point = GameManger.Instance.score;
 
     void Start()
@@ -24,7 +25,7 @@ public class cat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && isJumping==false)
+        if((Input.GetKeyDown(KeyCode.Space)|| Input.GetKeyDown(KeyCode.UpArrow)) && isJumping==false)
         {
             rb.velocity = new Vector2(0, jump);
             isJumping=true;
@@ -36,6 +37,7 @@ public class cat : MonoBehaviour
         isJumping=false;
         if(collision.tag == "tree")
         {
+            touchTree.Play();
             point--;
             giftText.text = ": " + point;
             GameManger.Instance.score = point;

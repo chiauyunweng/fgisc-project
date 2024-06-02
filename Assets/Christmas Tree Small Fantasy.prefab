@@ -123,9 +123,6 @@ MonoBehaviour:
   movementSpeed: 10
   startPositon: 20
   endPositon: -20
-  tree_img:
-  - {fileID: 8349278876224233021}
-  - {fileID: 1688076765968453005, guid: 0e8c679c92794a849a9ac43a55dbcf9f, type: 3}
 --- !u!61 &2972048190980727649
 BoxCollider2D:
   m_ObjectHideFlags: 0

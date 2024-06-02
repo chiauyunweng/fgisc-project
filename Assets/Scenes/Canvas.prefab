@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 4894871070385829295}
   - component: {fileID: 5206932769812465510}
   - component: {fileID: 8161718866156437530}
+  - component: {fileID: 4807924847172884489}
+  - component: {fileID: 3449219999930402809}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -105,6 +107,31 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &4807924847172884489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23104013383552665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7917bdc1c6db44faa2be82f96eddb3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  show: {fileID: 3375654016344852900}
+--- !u!114 &3449219999930402809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23104013383552665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7f657752e7384844b9b5a83f07a0ca3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &746082719786646435
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,7 +229,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5683654601731367653
 RectTransform:
   m_ObjectHideFlags: 0
@@ -304,7 +331,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2661817918170911354}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3449219999930402809}
+        m_TargetAssemblyTypeName: StartMenu, Assembly-CSharp
+        m_MethodName: Changetogame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3470847016635643372
 GameObject:
   m_ObjectHideFlags: 0
@@ -713,4 +752,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7037024923087464950}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3449219999930402809}
+        m_TargetAssemblyTypeName: StartMenu, Assembly-CSharp
+        m_MethodName: ChangeScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
